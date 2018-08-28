@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Animated</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <style>
+            body{
+                padding: 200px 50px;
+            }
+            .wrapper{
+                display: flex;
+                flex-direction: row;
+            }
+            .container{
+                position: relative;
+                display: inline-block;
+                margin: 100px ;
+                /*padding: 40px;*/
+                width: 200px;
+                height: 180px;
+                border-bottom: 5px solid #000000;
+                /*border: 1px solid green;*/
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+            .container:after{
+                content: "";
+                display: block;
+                position: absolute;
+                left: calc(50% - 5px);
+                bottom: 0;
+                width: 10px;
+                height: 180px;
+                background: yellow;
+                z-index: -1;
+
+
+            }
+            .disk{
+                position: relative;
+                transition: 1s all;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 30px;
+                margin: 0 auto;
+
+            }
+            .disk1{
+                background:green;
+                width:20%;
+            }
+            .disk2{
+                background:blue;
+                width:40%;
+            }
+            .disk3{
+                background:purple;
+                width:60%;
+            }
+            .disk4{
+                background:gray;
+                width:80%;
+            }
+            .disk5{
+                background:orange;
+                width:90%;
+            }
+            .disk6{
+                background:maroon;
+                width:100%;
+            }
+            .disk7{
+                background:magenta;
+                width:100%;
+            }
+            .disk8{
+                background:yellowgreen;
+                width:100%;
+            }
+            .disk9{
+                background:lightpink;
+                width:100%;
+            }
+            .disk10{
+                background:lightgreen;
+                width:100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="container container-1">
+                <div class="disk disk1"></div>
+                <div class="disk disk2"></div>
+                <div class="disk disk3"></div>
+                <div class="disk disk4"></div>
+
+
+
+
+
+            </div>
+
+            <div class="container container-2">
+                <!--<div class ="disk disk4"></div>-->
+
+            </div>
+            <div class="container container-3">
+
+            </div>
+        </div>
+        <button onclick="move(1, 2), setTimeout(function () {
+                    move(1, 3);
+                }, 4000);
+                setTimeout(function () {
+                    move(2, 3);
+                }, 8000);
+                setTimeout(function () {
+                    move(1, 2);
+                }, 12000);
+                setTimeout(function () {
+                    move(3, 1);
+                }, 16000);
+                setTimeout(function () {
+                    move(3, 2);
+                }, 20000);
+                setTimeout(function () {
+                    move(1, 2);
+                }, 24000);
+                setTimeout(function () {
+                    move(1, 3);
+                }, 28000);
+                setTimeout(function () {
+                    move(2, 1);
+                }, 32000);
+                setTimeout(function () {
+                    move(2, 3);
+                }, 36000);
+                setTimeout(function () {
+                    move(1, 2);
+                }, 40000);
+                setTimeout(function () {
+                    move(3, 1);
+                }, 44000);
+                setTimeout(function () {
+                    move(2, 1);
+                }, 48000);
+                setTimeout(function () {
+                    move(2, 3);
+                }, 52000);
+                setTimeout(function () {
+                    move(1, 2);
+                }, 56000);
+                setTimeout(function () {
+                    move(1, 3);
+                }, 60000);
+                setTimeout(function () {
+                    move(2, 3);
+                }, 64000);">Move</button> 
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script>
+            let container = document.querySelector('.container');
+            let container1 = document.querySelector('.container-1 .disk:first-child');
+            let container2 = document.querySelector('.container-2 .disk:first-child');
+            let container3 = document.querySelector('.container-3 .disk:first-child');
+
+            let width = (getComputedStyle(container).width);
+            let margin = (getComputedStyle(container).margin);
+            let height = (getComputedStyle(container).height);
+
+            height = parseInt(height, 10);
+            margin = parseInt(margin, 10);
+            width = parseInt(width, 10);
+
+            function move(from, to) {
+                window.disk = document.querySelector('.container-' + from + ' .disk:first-child');
+                window.container_start = document.querySelector('.container-' + from);
+                window.container_to = document.querySelector('.container-' + to);
+                window.element_to = document.querySelector('.container-' + to + ' .disk:first-child');
+                window.toppos = disk.offsetTop + 30;
+                window.downpos = to.offsetTop;
+
+                window.clone = disk.cloneNode();
+                clone.style.top = 0;
+                clone.style.left = 0;
+
+                window['animate' + from + to]();
+            }
+            function animate12() {
+
+                disk.style.top = -toppos + "px";
+                setTimeout(function () {
+                    disk.style.left = width + margin * 2 + "px";
+                }, 1000);
+                if (!element_to) {
+                    downpos = height - toppos;
+                } else {
+                    downpos = -toppos + element_to.offsetTop;
+                }
+                setTimeout(function () {
+                    disk.style.top = downpos + "px";
+                }, 2000);
+                setTimeout(function () {
+                    container_start.removeChild(disk);
+                    container_to.insertBefore(clone, element_to);
+                }, 3000);
+            }
+            function animate13() {
+
+                disk.style.top = -toppos + "px";
+                setTimeout(function () {
+                    disk.style.left = width * 2 + margin * 4 + "px";
+                }, 1000);
+                if (!element_to) {
+                    downpos = height - toppos;
+                } else {
+                    downpos = -toppos + element_to.offsetTop;
+                }
+                setTimeout(function () {
+                    disk.style.top = downpos + "px";
+                }, 2000);
+                setTimeout(function () {
+                    container_start.removeChild(disk);
+                    container_to.insertBefore(clone, element_to);
+                }, 3000);
+            }
+            function animate21() {
+
+                disk.style.top = -toppos + "px";
+                setTimeout(function () {
+                    disk.style.left = -(width + margin * 2) + "px";
+                }, 1000);
+                if (!element_to) {
+                    downpos = height - toppos;
+                } else {
+                    downpos = -toppos + element_to.offsetTop;
+                }
+                setTimeout(function () {
+                    disk.style.top = downpos + "px";
+                }, 2000);
+                setTimeout(function () {
+                    container_start.removeChild(disk);
+                    container_to.insertBefore(clone, element_to);
+                }, 3000);
+            }
+            function animate23() {
+
+                disk.style.top = -toppos + "px";
+                setTimeout(function () {
+                    disk.style.left = width + margin * 2 + "px";
+                }, 1000);
+                if (!element_to) {
+                    downpos = height - toppos;
+                } else {
+                    downpos = -toppos + element_to.offsetTop;
+                }
+                setTimeout(function () {
+                    disk.style.top = downpos + "px";
+                }, 2000);
+                setTimeout(function () {
+                    container_start.removeChild(disk);
+                    container_to.insertBefore(clone, element_to);
+                }, 3000);
+            }
+            function animate32() {
+
+                disk.style.top = -toppos + "px";
+                setTimeout(function () {
+                    disk.style.left = -(width + margin * 2) + "px";
+                }, 1000);
+                if (!element_to) {
+                    downpos = height - toppos;
+                } else {
+                    downpos = -toppos + element_to.offsetTop;
+                }
+                setTimeout(function () {
+                    disk.style.top = downpos + "px";
+                }, 2000);
+                setTimeout(function () {
+                    container_start.removeChild(disk);
+                    container_to.insertBefore(clone, element_to);
+                }, 3000);
+            }
+            function animate31() {
+
+                disk.style.top = -toppos + "px";
+                setTimeout(function () {
+                    disk.style.left = -(width * 2 + margin * 4) + "px";
+                }, 1000);
+                if (!element_to) {
+                    downpos = height - toppos;
+                } else {
+                    downpos = -toppos + element_to.offsetTop;
+                }
+                setTimeout(function () {
+                    disk.style.top = downpos + "px";
+                }, 2000);
+                setTimeout(function () {
+                    container_start.removeChild(disk);
+                    container_to.insertBefore(clone, element_to);
+                }, 3000);
+            }
+
+        </script>
+
+
+    </body>
+</html>
