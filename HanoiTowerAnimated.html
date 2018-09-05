@@ -100,219 +100,307 @@ and open the template in the editor.
     <body>
         <div class="wrapper">
             <div class="container container-1">
-                <div class="disk disk1"></div>
-                <div class="disk disk2"></div>
-                <div class="disk disk3"></div>
-                <div class="disk disk4"></div>
-
-
-
-
-
+             
             </div>
 
             <div class="container container-2">
-                <!--<div class ="disk disk4"></div>-->
 
             </div>
             <div class="container container-3">
 
             </div>
         </div>
-        <button onclick="move(1, 2), setTimeout(function () {
-                    move(1, 3);
-                }, 4000);
-                setTimeout(function () {
-                    move(2, 3);
-                }, 8000);
-                setTimeout(function () {
-                    move(1, 2);
-                }, 12000);
-                setTimeout(function () {
-                    move(3, 1);
-                }, 16000);
-                setTimeout(function () {
-                    move(3, 2);
-                }, 20000);
-                setTimeout(function () {
-                    move(1, 2);
-                }, 24000);
-                setTimeout(function () {
-                    move(1, 3);
-                }, 28000);
-                setTimeout(function () {
-                    move(2, 1);
-                }, 32000);
-                setTimeout(function () {
-                    move(2, 3);
-                }, 36000);
-                setTimeout(function () {
-                    move(1, 2);
-                }, 40000);
-                setTimeout(function () {
-                    move(3, 1);
-                }, 44000);
-                setTimeout(function () {
-                    move(2, 1);
-                }, 48000);
-                setTimeout(function () {
-                    move(2, 3);
-                }, 52000);
-                setTimeout(function () {
-                    move(1, 2);
-                }, 56000);
-                setTimeout(function () {
-                    move(1, 3);
-                }, 60000);
-                setTimeout(function () {
-                    move(2, 3);
-                }, 64000);">Move</button> 
+        <button onclick="start()">Move</button> 
+        
+        <form action="action">
+            <p><input type='text'  id='disknumber' size='20' > </p>
+            <input type="button" value="Enter" onclick="diskcount()">
+            <pre id="display"></pre>
+        </form>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <script>
-            let container = document.querySelector('.container');
-            let container1 = document.querySelector('.container-1 .disk:first-child');
-            let container2 = document.querySelector('.container-2 .disk:first-child');
-            let container3 = document.querySelector('.container-3 .disk:first-child');
 
-            let width = (getComputedStyle(container).width);
-            let margin = (getComputedStyle(container).margin);
-            let height = (getComputedStyle(container).height);
-
-            height = parseInt(height, 10);
-            margin = parseInt(margin, 10);
-            width = parseInt(width, 10);
-
-            function move(from, to) {
-                window.disk = document.querySelector('.container-' + from + ' .disk:first-child');
-                window.container_start = document.querySelector('.container-' + from);
-                window.container_to = document.querySelector('.container-' + to);
-                window.element_to = document.querySelector('.container-' + to + ' .disk:first-child');
-                window.toppos = disk.offsetTop + 30;
-                window.downpos = to.offsetTop;
-
-                window.clone = disk.cloneNode();
-                clone.style.top = 0;
-                clone.style.left = 0;
-
-                window['animate' + from + to]();
-            }
-            function animate12() {
-
-                disk.style.top = -toppos + "px";
-                setTimeout(function () {
-                    disk.style.left = width + margin * 2 + "px";
-                }, 1000);
-                if (!element_to) {
-                    downpos = height - toppos;
-                } else {
-                    downpos = -toppos + element_to.offsetTop;
+                let container = document.querySelector('.container');
+                let width = (getComputedStyle(container).width);
+                let margin = (getComputedStyle(container).margin);
+                let height = (getComputedStyle(container).height);
+                height = parseInt(height, 10);
+                margin = parseInt(margin, 10);
+                width = parseInt(width, 10);
+                var hanoi = [];
+                function diskcount() {
+                    let disknum = document.getElementById('disknumber').value;
+                    towers(disknum, 1, 3, 2);
+                    if (disknum === '1') {
+                        var container_1 = document.querySelector('.container-1');
+                        var div1 = document.createElement('div');
+                        div1.classList.add("disk");
+                        div1.classList.add("disk1");
+                        container_1.appendChild(div1);
+                    } else if (disknum === '2') {
+                        var container_1 = document.querySelector('.container-1');
+                        var div1 = document.createElement('div');
+                        div1.classList.add("disk");
+                        div1.classList.add("disk1");
+                        container_1.appendChild(div1);
+                        var container_1 = document.querySelector('.container-1');
+                        var div2 = document.createElement('div');
+                        div2.classList.add("disk");
+                        div2.classList.add("disk2");
+                        container_1.appendChild(div2);
+                    } else if (disknum === '3') {
+                        var container_1 = document.querySelector('.container-1');
+                        var div1 = document.createElement('div');
+                        div1.classList.add("disk");
+                        div1.classList.add("disk1");
+                        container_1.appendChild(div1);
+                        var container_1 = document.querySelector('.container-1');
+                        var div2 = document.createElement('div');
+                        div2.classList.add("disk");
+                        div2.classList.add("disk2");
+                        container_1.appendChild(div2);
+                        var container_1 = document.querySelector('.container-1');
+                        var div3 = document.createElement('div');
+                        div3.classList.add("disk");
+                        div3.classList.add("disk3");
+                        container_1.appendChild(div3);
+                    } else if (disknum === '4') {
+                        var container_1 = document.querySelector('.container-1');
+                        var div1 = document.createElement('div');
+                        div1.classList.add("disk");
+                        div1.classList.add("disk1");
+                        container_1.appendChild(div1);
+                        var container_1 = document.querySelector('.container-1');
+                        var div2 = document.createElement('div');
+                        div2.classList.add("disk");
+                        div2.classList.add("disk2");
+                        container_1.appendChild(div2);
+                        var container_1 = document.querySelector('.container-1');
+                        var div3 = document.createElement('div');
+                        div3.classList.add("disk");
+                        div3.classList.add("disk3");
+                        container_1.appendChild(div3);
+                        var container_1 = document.querySelector('.container-1');
+                        var div4 = document.createElement('div');
+                        div4.classList.add("disk");
+                        div4.classList.add("disk4");
+                        container_1.appendChild(div4);
+                    } else if (disknum === '5') {
+                        var container_1 = document.querySelector('.container-1');
+                        var div1 = document.createElement('div');
+                        div1.classList.add("disk");
+                        div1.classList.add("disk1");
+                        container_1.appendChild(div1);
+                        var container_1 = document.querySelector('.container-1');
+                        var div2 = document.createElement('div');
+                        div2.classList.add("disk");
+                        div2.classList.add("disk2");
+                        container_1.appendChild(div2);
+                        var container_1 = document.querySelector('.container-1');
+                        var div3 = document.createElement('div');
+                        div3.classList.add("disk");
+                        div3.classList.add("disk3");
+                        container_1.appendChild(div3);
+                        var container_1 = document.querySelector('.container-1');
+                        var div4 = document.createElement('div');
+                        div4.classList.add("disk");
+                        div4.classList.add("disk4");
+                        container_1.appendChild(div4);
+                        var container_1 = document.querySelector('.container-1');
+                        var div5 = document.createElement('div');
+                        div5.classList.add("disk");
+                        div5.classList.add("disk5");
+                        container_1.appendChild(div5);
+                    } else if (disknum === '6') {
+                        var container_1 = document.querySelector('.container-1');
+                        var div1 = document.createElement('div');
+                        div1.classList.add("disk");
+                        div1.classList.add("disk1");
+                        container_1.appendChild(div1);
+                        var container_1 = document.querySelector('.container-1');
+                        var div2 = document.createElement('div');
+                        div2.classList.add("disk");
+                        div2.classList.add("disk2");
+                        container_1.appendChild(div2);
+                        var container_1 = document.querySelector('.container-1');
+                        var div3 = document.createElement('div');
+                        div3.classList.add("disk");
+                        div3.classList.add("disk3");
+                        container_1.appendChild(div3);
+                        var container_1 = document.querySelector('.container-1');
+                        var div4 = document.createElement('div');
+                        div4.classList.add("disk");
+                        div4.classList.add("disk4");
+                        container_1.appendChild(div4);
+                        var container_1 = document.querySelector('.container-1');
+                        var div5 = document.createElement('div');
+                        div5.classList.add("disk");
+                        div5.classList.add("disk5");
+                        container_1.appendChild(div5);
+                        var container_1 = document.querySelector('.container-1');
+                        var div6 = document.createElement('div');
+                        div6.classList.add("disk");
+                        div6.classList.add("disk6");
+                        container_1.appendChild(div6);
+                    } else if (disknum > '6') {
+                        alert('Disk number is too large, please enter number between 1-6.');
+                    }
                 }
-                setTimeout(function () {
-                    disk.style.top = downpos + "px";
-                }, 2000);
-                setTimeout(function () {
-                    container_start.removeChild(disk);
-                    container_to.insertBefore(clone, element_to);
-                }, 3000);
-            }
-            function animate13() {
-
-                disk.style.top = -toppos + "px";
-                setTimeout(function () {
-                    disk.style.left = width * 2 + margin * 4 + "px";
-                }, 1000);
-                if (!element_to) {
-                    downpos = height - toppos;
-                } else {
-                    downpos = -toppos + element_to.offsetTop;
+                function towers(disc, from, to, middle) {
+                    if (disc > 0) {
+                        towers(disc - 1, from, middle, to);
+                        hanoi.push({
+                            from: from,
+                            to: to
+                        });
+                        towers(disc - 1, middle, to, from);
+                    }
                 }
-                setTimeout(function () {
-                    disk.style.top = downpos + "px";
-                }, 2000);
-                setTimeout(function () {
-                    container_start.removeChild(disk);
-                    container_to.insertBefore(clone, element_to);
-                }, 3000);
-            }
-            function animate21() {
 
-                disk.style.top = -toppos + "px";
-                setTimeout(function () {
-                    disk.style.left = -(width + margin * 2) + "px";
-                }, 1000);
-                if (!element_to) {
-                    downpos = height - toppos;
-                } else {
-                    downpos = -toppos + element_to.offsetTop;
+                let amount_of_disk = document.querySelectorAll('.container-1 .disk').length;
+                towers(amount_of_disk, 1, 3, 2);
+                
+                function animate(from, to) {
+                    console.log('.container-' + from + ' .disk:first-child');
+                    window.disk = document.querySelector('.container-' + from + ' .disk:first-child');
+                    window.container_start = document.querySelector('.container-' + from);
+                    window.container_to = document.querySelector('.container-' + to);
+                    window.element_to = document.querySelector('.container-' + to + ' .disk:first-child');
+                    window.toppos = window.disk.offsetTop + 30;
+                    window.downpos = to.offsetTop;
+                    window.clone = window.disk.cloneNode();
+                    clone.style.top = 0;
+                    clone.style.left = 0;
+                    window['animate' + from + to]();
+                    let step = hanoi.shift();
+                    if (hanoi.length === 0 && !step) {
+                        return;
+                    }
+                    setTimeout(animate, 2000, step.from, step.to);
                 }
-                setTimeout(function () {
-                    disk.style.top = downpos + "px";
-                }, 2000);
-                setTimeout(function () {
-                    container_start.removeChild(disk);
-                    container_to.insertBefore(clone, element_to);
-                }, 3000);
-            }
-            function animate23() {
 
-                disk.style.top = -toppos + "px";
-                setTimeout(function () {
-                    disk.style.left = width + margin * 2 + "px";
-                }, 1000);
-                if (!element_to) {
-                    downpos = height - toppos;
-                } else {
-                    downpos = -toppos + element_to.offsetTop;
+                function start() {
+                    let step = hanoi.shift();
+                    animate(step.from, step.to);
                 }
-                setTimeout(function () {
-                    disk.style.top = downpos + "px";
-                }, 2000);
-                setTimeout(function () {
-                    container_start.removeChild(disk);
-                    container_to.insertBefore(clone, element_to);
-                }, 3000);
-            }
-            function animate32() {
 
-                disk.style.top = -toppos + "px";
-                setTimeout(function () {
-                    disk.style.left = -(width + margin * 2) + "px";
-                }, 1000);
-                if (!element_to) {
-                    downpos = height - toppos;
-                } else {
-                    downpos = -toppos + element_to.offsetTop;
+                function animate12() {
+
+                    disk.style.top = -toppos + "px";
+                    setTimeout(function () {
+                        disk.style.left = width + margin * 2 + "px";
+                    }, 500);
+                    if (!element_to) {
+                        downpos = height - toppos;
+                    } else {
+                        downpos = -toppos + element_to.offsetTop;
+                    }
+                    setTimeout(function () {
+                        disk.style.top = downpos + "px";
+                    }, 1000);
+                    setTimeout(function () {
+                        container_start.removeChild(disk);
+                        container_to.insertBefore(clone, element_to);
+                    }, 1500);
                 }
-                setTimeout(function () {
-                    disk.style.top = downpos + "px";
-                }, 2000);
-                setTimeout(function () {
-                    container_start.removeChild(disk);
-                    container_to.insertBefore(clone, element_to);
-                }, 3000);
-            }
-            function animate31() {
+                function animate13() {
 
-                disk.style.top = -toppos + "px";
-                setTimeout(function () {
-                    disk.style.left = -(width * 2 + margin * 4) + "px";
-                }, 1000);
-                if (!element_to) {
-                    downpos = height - toppos;
-                } else {
-                    downpos = -toppos + element_to.offsetTop;
+                    disk.style.top = -toppos + "px";
+                    setTimeout(function () {
+                        disk.style.left = width * 2 + margin * 4 + "px";
+                    }, 500);
+                    if (!element_to) {
+                        downpos = height - toppos;
+                    } else {
+                        downpos = -toppos + element_to.offsetTop;
+                    }
+                    setTimeout(function () {
+                        disk.style.top = downpos + "px";
+                    }, 1000);
+                    setTimeout(function () {
+                        container_start.removeChild(disk);
+                        container_to.insertBefore(clone, element_to);
+                    }, 1500);
                 }
-                setTimeout(function () {
-                    disk.style.top = downpos + "px";
-                }, 2000);
-                setTimeout(function () {
-                    container_start.removeChild(disk);
-                    container_to.insertBefore(clone, element_to);
-                }, 3000);
-            }
+                function animate21() {
 
+                    disk.style.top = -toppos + "px";
+                    setTimeout(function () {
+                        disk.style.left = -(width + margin * 2) + "px";
+                    }, 500);
+                    if (!element_to) {
+                        downpos = height - toppos;
+                    } else {
+                        downpos = -toppos + element_to.offsetTop;
+                    }
+                    setTimeout(function () {
+                        disk.style.top = downpos + "px";
+                    }, 1000);
+                    setTimeout(function () {
+                        container_start.removeChild(disk);
+                        container_to.insertBefore(clone, element_to);
+                    }, 1500);
+                }
+                function animate23() {
+
+                    disk.style.top = -toppos + "px";
+                    setTimeout(function () {
+                        disk.style.left = width + margin * 2 + "px";
+                    }, 500);
+                    if (!element_to) {
+                        downpos = height - toppos;
+                    } else {
+                        downpos = -toppos + element_to.offsetTop;
+                    }
+                    setTimeout(function () {
+                        disk.style.top = downpos + "px";
+                    }, 1000);
+                    setTimeout(function () {
+                        container_start.removeChild(disk);
+                        container_to.insertBefore(clone, element_to);
+                    }, 1500);
+                }
+                function animate32() {
+
+                    disk.style.top = -toppos + "px";
+                    setTimeout(function () {
+                        disk.style.left = -(width + margin * 2) + "px";
+                    }, 500);
+                    if (!element_to) {
+                        downpos = height - toppos;
+                    } else {
+                        downpos = -toppos + element_to.offsetTop;
+                    }
+                    setTimeout(function () {
+                        disk.style.top = downpos + "px";
+                    }, 1000);
+                    setTimeout(function () {
+                        container_start.removeChild(disk);
+                        container_to.insertBefore(clone, element_to);
+                    }, 1500);
+                }
+                function animate31() {
+
+                    disk.style.top = -toppos + "px";
+                    setTimeout(function () {
+                        disk.style.left = -(width * 2 + margin * 4) + "px";
+                    }, 500);
+                    if (!element_to) {
+                        downpos = height - toppos;
+                    } else {
+                        downpos = -toppos + element_to.offsetTop;
+                    }
+                    setTimeout(function () {
+                        disk.style.top = downpos + "px";
+                    }, 1000);
+                    setTimeout(function () {
+                        container_start.removeChild(disk);
+                        container_to.insertBefore(clone, element_to);
+                    }, 1500);
+                }
+                
         </script>
 
 
