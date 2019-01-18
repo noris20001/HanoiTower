@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>HanoiTower</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         
+    </head>
+    <body>
+        <p>Choose number of disks</p>
+        <form action="action">
+        <input type='text'  id='disknumber' size='20' > 
+        <p>
+            <input type="button" value="send" onclick="run()">
+        </p>
+        <pre id="display"></pre>
+        </form>
+                      
+        <script>
+            
+            function run(){
+                let diskNum = document.getElementById('disknumber').value;
+                hanoi(diskNum,'start','end','middle'); 
+                console.log(counter);
+            }
+            
+            let counter=0;
+            function hanoi(disc,start,end,middle){
+
+                if(disc > 0){
+                  hanoi(disc -1,start,middle,end);
+                  document.getElementById("display").innerHTML +=('Move disc '+disc+' from '+start+' to '+middle + "\n");
+                  hanoi(disc -1,end,start,middle);
+                      counter++;
+                }
+            };
+            
+        </script>
+    </body>
+</html>
